@@ -14,19 +14,26 @@ def load_data():
 # Load the dataset once into Streamlit cache
 df = load_data()
 
-st.title("🍔 AI-Powered Restaurant Recommender")
+st.title("🍔 Zomato AI Recommender")
 st.markdown("Find the perfect spot for your next meal using AI! 🍕🍣🍷")
 st.markdown("---")
 
-# Sidebar for strict filters
-st.sidebar.header("🎯 Strict Filters")
-st.sidebar.markdown("Use these filters to narrow down the options deterministically.")
+# Zomato Filters (Main View)
+st.subheader("🎯 Zomato Filters")
+col1, col2, col3 = st.columns(3)
 
-city = st.sidebar.text_input("City (Required)", placeholder="e.g., Bangalore, Delhi")
-budget = st.sidebar.selectbox("Budget Level", options=["Any", "Low", "Medium", "High"])
-rest_type = st.sidebar.selectbox("Establishment Type", options=["Any", "Restaurant", "Cafe", "Hotel", "Casual Dining", "Quick Bites", "Pub", "Dessert Parlor", "Fine Dining"])
-cuisine = st.sidebar.text_input("Cuisine Preference", placeholder="e.g., Italian, Chinese, North Indian")
-min_rating = st.sidebar.slider("Minimum Rating", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
+with col1:
+    city = st.text_input("City (Required)", placeholder="e.g., Mumbai, Bangalore")
+    min_rating = st.slider("Minimum Rating", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
+
+with col2:
+    rest_type = st.selectbox("Establishment Type", options=["Any", "Restaurant", "Cafe", "Hotel", "Casual Dining", "Quick Bites", "Pub", "Dessert Parlor", "Fine Dining"])
+    cuisine = st.text_input("Cuisine Preference", placeholder="e.g., Chinese, Italian")
+
+with col3:
+    budget = st.selectbox("Budget Level", options=["Any", "Low", "Medium", "High"])
+
+st.markdown("---")
 
 # Main container for the unstructured "Nuance"
 st.subheader("What exactly are you looking for? 🕵️‍♂️")
@@ -37,7 +44,7 @@ nuance = st.text_area(
 
 if st.button("Generate AI Recommendations ✨", type="primary", use_container_width=True):
     if not city:
-        st.error("Please enter a City in the sidebar to begin!")
+        st.error("Please enter a City to begin!")
     elif df is None or df.empty:
         st.error("🚨 Dataset not loaded properly.")
     else:
