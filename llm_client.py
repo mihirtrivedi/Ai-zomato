@@ -5,7 +5,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load environment variables (e.g. OPENAI_API_KEY)
-load_dotenv()
+load_dotenv(override=True)
 
 client = None
 DEFAULT_MODEL = "gpt-4o-mini"
@@ -13,7 +13,7 @@ DEFAULT_MODEL = "gpt-4o-mini"
 def init_client():
     global client, DEFAULT_MODEL
     # Reload environment variables
-    load_dotenv()
+    load_dotenv(override=True)
     
     # Try getting key from environment first
     api_key = os.environ.get("OPENAI_API_KEY", "")
