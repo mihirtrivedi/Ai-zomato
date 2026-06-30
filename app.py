@@ -24,6 +24,7 @@ st.sidebar.markdown("Use these filters to narrow down the options deterministica
 
 city = st.sidebar.text_input("City (Required)", placeholder="e.g., Bangalore, Delhi")
 budget = st.sidebar.selectbox("Budget Level", options=["Any", "Low", "Medium", "High"])
+rest_type = st.sidebar.selectbox("Establishment Type", options=["Any", "Restaurant", "Cafe", "Hotel", "Casual Dining", "Quick Bites", "Pub", "Dessert Parlor", "Fine Dining"])
 cuisine = st.sidebar.text_input("Cuisine Preference", placeholder="e.g., Italian, Chinese, North Indian")
 min_rating = st.sidebar.slider("Minimum Rating", min_value=1.0, max_value=5.0, value=3.5, step=0.1)
 
@@ -44,6 +45,7 @@ if st.button("Generate AI Recommendations ✨", type="primary", use_container_wi
             
             b_val = None if budget == "Any" else budget.lower()
             c_val = None if not cuisine else cuisine
+            r_val = None if rest_type == "Any" else rest_type.lower()
             
             # 1. Deterministic Filtering
             filtered_restaurants = apply_filters(
@@ -52,6 +54,7 @@ if st.button("Generate AI Recommendations ✨", type="primary", use_container_wi
                 budget=b_val,
                 cuisine=c_val,
                 min_rating=min_rating,
+                rest_type=r_val,
                 top_n=15
             )
             

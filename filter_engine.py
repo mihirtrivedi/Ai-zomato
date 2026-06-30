@@ -7,6 +7,7 @@ def apply_filters(
     budget: Optional[str] = None,
     cuisine: Optional[str] = None,
     min_rating: Optional[float] = None,
+    rest_type: Optional[str] = None,
     top_n: int = 15
 ) -> List[Dict[str, Any]]:
     """
@@ -41,6 +42,10 @@ def apply_filters(
     # 4. Filter by Minimum Rating
     if min_rating is not None and 'rating' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['rating'] >= min_rating]
+
+    # 4.5. Filter by Establishment Type
+    if rest_type and 'rest_type' in filtered_df.columns:
+        filtered_df = filtered_df[filtered_df['rest_type'].str.contains(rest_type.lower().strip(), case=False, na=False)]
 
     # 5. Sort by rating (descending) and cost (ascending) to get the best value options
     if 'rating' in filtered_df.columns and 'cost' in filtered_df.columns:

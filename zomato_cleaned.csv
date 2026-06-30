@@ -1,46 +1,46 @@
-name,location,cuisine,cost,rating
-toit,"indiranagar, bangalore","italian, american, continental",1500.0,4.7
-truffles,"koramangala, bangalore","fast food, american, desserts",800.0,4.6
-karavalli,"residency road, bangalore","south indian, seafood, mangalorean",2500.0,4.8
-the black pearl,"marathahalli, bangalore","north indian, barbecue, continental",1800.0,4.5
-nagarjuna,"indiranagar, bangalore","south indian, andhra, biryani",900.0,4.4
-koshy's,"st. marks road, bangalore","south indian, british, continental",1000.0,4.1
-windmills craftworks,"whitefield, bangalore","american, north indian, continental",2200.0,4.7
-corner house ice creams,"jayanagar, bangalore","desserts, ice cream",400.0,4.8
-mtr (mavalli tiffin room),"lalbagh road, bangalore","south indian, vegetarian",500.0,4.6
-vidyarthi bhavan,"basavanagudi, bangalore","south indian, vegetarian",300.0,4.5
-sunny's,"lavelle road, bangalore","italian, european, continental",1800.0,4.4
-byg brewski brewing company,"sarjapur road, bangalore","continental, north indian, italian",1600.0,4.6
-shiro,"lavelle road, bangalore","japanese, asian, sushi",2800.0,4.6
-o.g. variar & sons,"rajajinagar, bangalore","bakery, desserts",200.0,4.7
-elysium biryani,"hsr layout, bangalore","north indian, biryani, mughlai",600.0,4.3
-leopold cafe,"colaba, mumbai","chinese, north indian, american",1200.0,4.2
-britannia & co.,"fort, mumbai","parsi, irani",1000.0,4.5
-bademiya,"colaba, mumbai","mughlai, kebab, north indian",800.0,4.0
-the tasting room,"lower parel, mumbai","italian, european, continental",2200.0,4.4
-trishna,"fort, mumbai","seafood, south indian, mangalorean",2000.0,4.6
-bastian,"bandra west, mumbai","seafood, modern indian, continental",3500.0,4.5
-gajalee,"vile parle, mumbai","maharashtrian, seafood, konkan",1500.0,4.5
-joey's pizza,"andheri west, mumbai","pizza, italian",900.0,4.6
-the bombay canteen,"lower parel, mumbai","modern indian, regional indian",2400.0,4.7
-social,"colaba, mumbai","continental, finger food, american",1400.0,4.3
-cafe mondegar,"colaba, mumbai","american, chinese, continental",1100.0,4.2
-pizza by the bay,"marine drive, mumbai","pizza, italian",1800.0,4.1
-peshawri,"andheri east, mumbai","north indian, mughlai",5000.0,4.8
-elco pani puri center,"bandra west, mumbai","fast food, street food, vegetarian",400.0,4.4
-yazdan bakery,"fort, mumbai","bakery, irani, desserts",250.0,4.5
-karim's,"jama masjid, delhi","mughlai, north indian, kebab",1000.0,4.4
-indian accent,"lodhi road, delhi",modern indian,5000.0,4.9
-bukhara,"chanakyapuri, delhi","north indian, tandoori",6000.0,4.8
-saravana bhavan,"connaught place, delhi","south indian, vegetarian",600.0,4.5
-wenger's,"connaught place, delhi","bakery, desserts",400.0,4.6
-farzi cafe,"connaught place, delhi","modern indian, fusion",1800.0,4.3
-kuremal mohan lal kulfi wale,"chawri bazar, delhi","desserts, street food",250.0,4.5
-diggin,"chanakyapuri, delhi","italian, continental, cafe",1400.0,4.4
-big chill,"khan market, delhi","italian, continental, desserts",1500.0,4.6
-yum yum cha,"saket, delhi","japanese, asian, sushi",2000.0,4.6
-leo's artisanal pizza,"vasant vihar, delhi","pizza, italian",1700.0,4.7
-ama cafe,"majnu ka tilla, delhi","continental, cafe, desserts",900.0,4.5
-rajinder da dhaba,"safdarjung, delhi","north indian, mughlai, tandoori",800.0,4.4
-moti mahal,"daryaganj, delhi","north indian, mughlai, butter chicken",1200.0,4.2
-united coffee house,"connaught place, delhi","continental, north indian, high tea",2500.0,4.3
+name,location,cuisine,cost,rating,rest_type
+toit,"indiranagar, bangalore","italian, american, continental",1500.0,4.7,cafe
+truffles,"koramangala, bangalore","fast food, american, desserts",800.0,4.6,restaurant
+karavalli,"residency road, bangalore","south indian, seafood, mangalorean",2500.0,4.8,restaurant
+the black pearl,"marathahalli, bangalore","north indian, barbecue, continental",1800.0,4.5,hotel
+nagarjuna,"indiranagar, bangalore","south indian, andhra, biryani",900.0,4.4,restaurant
+koshy's,"st. marks road, bangalore","south indian, british, continental",1000.0,4.1,restaurant
+windmills craftworks,"whitefield, bangalore","american, north indian, continental",2200.0,4.7,pub
+corner house ice creams,"jayanagar, bangalore","desserts, ice cream",400.0,4.8,dessert parlor
+mtr (mavalli tiffin room),"lalbagh road, bangalore","south indian, vegetarian",500.0,4.6,restaurant
+vidyarthi bhavan,"basavanagudi, bangalore","south indian, vegetarian",300.0,4.5,restaurant
+sunny's,"lavelle road, bangalore","italian, european, continental",1800.0,4.4,casual dining
+byg brewski brewing company,"sarjapur road, bangalore","continental, north indian, italian",1600.0,4.6,pub
+shiro,"lavelle road, bangalore","japanese, asian, sushi",2800.0,4.6,fine dining
+o.g. variar & sons,"rajajinagar, bangalore","bakery, desserts",200.0,4.7,bakery
+elysium biryani,"hsr layout, bangalore","north indian, biryani, mughlai",600.0,4.3,restaurant
+leopold cafe,"colaba, mumbai","chinese, north indian, american",1200.0,4.2,cafe
+britannia & co.,"fort, mumbai","parsi, irani",1000.0,4.5,restaurant
+bademiya,"colaba, mumbai","mughlai, kebab, north indian",800.0,4.0,quick bites
+the tasting room,"lower parel, mumbai","italian, european, continental",2200.0,4.4,restaurant
+trishna,"fort, mumbai","seafood, south indian, mangalorean",2000.0,4.6,restaurant
+bastian,"bandra west, mumbai","seafood, modern indian, continental",3500.0,4.5,fine dining
+gajalee,"vile parle, mumbai","maharashtrian, seafood, konkan",1500.0,4.5,restaurant
+joey's pizza,"andheri west, mumbai","pizza, italian",900.0,4.6,quick bites
+the bombay canteen,"lower parel, mumbai","modern indian, regional indian",2400.0,4.7,restaurant
+social,"colaba, mumbai","continental, finger food, american",1400.0,4.3,pub
+cafe mondegar,"colaba, mumbai","american, chinese, continental",1100.0,4.2,cafe
+pizza by the bay,"marine drive, mumbai","pizza, italian",1800.0,4.1,casual dining
+peshawri,"andheri east, mumbai","north indian, mughlai",5000.0,4.8,fine dining
+elco pani puri center,"bandra west, mumbai","fast food, street food, vegetarian",400.0,4.4,quick bites
+yazdan bakery,"fort, mumbai","bakery, irani, desserts",250.0,4.5,bakery
+karim's,"jama masjid, delhi","mughlai, north indian, kebab",1000.0,4.4,restaurant
+indian accent,"lodhi road, delhi",modern indian,5000.0,4.9,fine dining
+bukhara,"chanakyapuri, delhi","north indian, tandoori",6000.0,4.8,fine dining
+saravana bhavan,"connaught place, delhi","south indian, vegetarian",600.0,4.5,restaurant
+wenger's,"connaught place, delhi","bakery, desserts",400.0,4.6,bakery
+farzi cafe,"connaught place, delhi","modern indian, fusion",1800.0,4.3,cafe
+kuremal mohan lal kulfi wale,"chawri bazar, delhi","desserts, street food",250.0,4.5,dessert parlor
+diggin,"chanakyapuri, delhi","italian, continental, cafe",1400.0,4.4,cafe
+big chill,"khan market, delhi","italian, continental, desserts",1500.0,4.6,casual dining
+yum yum cha,"saket, delhi","japanese, asian, sushi",2000.0,4.6,restaurant
+leo's artisanal pizza,"vasant vihar, delhi","pizza, italian",1700.0,4.7,casual dining
+ama cafe,"majnu ka tilla, delhi","continental, cafe, desserts",900.0,4.5,cafe
+rajinder da dhaba,"safdarjung, delhi","north indian, mughlai, tandoori",800.0,4.4,restaurant
+moti mahal,"daryaganj, delhi","north indian, mughlai, butter chicken",1200.0,4.2,restaurant
+united coffee house,"connaught place, delhi","continental, north indian, high tea",2500.0,4.3,restaurant

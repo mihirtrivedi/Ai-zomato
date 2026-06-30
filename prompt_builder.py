@@ -30,7 +30,8 @@ def build_user_prompt(nuance: str, restaurants: List[Dict[str, Any]]) -> str:
             "location": r.get("location"),
             "cuisine": r.get("cuisine"),
             "rating": r.get("rating"),
-            "cost": r.get("cost")
+            "cost": r.get("cost"),
+            "type": r.get("rest_type")
         })
         
     restaurants_context = json.dumps(clean_restaurants, indent=2)
