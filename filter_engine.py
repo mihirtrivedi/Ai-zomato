@@ -19,17 +19,23 @@ def apply_filters(
 
     filtered_df = df.copy()
 
-    # 1. City is a strict requirement for basic geographic relevance
-    if city and 'location' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['location'].str.contains(city.lower().strip(), case=False, na=False)]
-
-    if filtered_df.empty:
-        return []
+    # 1. We removed the strict city cutoff to guarantee results for every combination!
 
     # 2. Forgiving Scoring System
     def calculate_score(row):
         score = 0
         
+        # City/Location points (Massive bonus for matching city to prioritize local options)
+        if city and pd.notnull(row.get('location')):
+            # We use fuzzy matching to account for typos like 'Banglore' vs 'Bangalore'
+            loc_str = str(row['location']).lower()
+            city_str = city.lower().strip()
+            # If the exact city is in the location, or the typo is close enough (simple contains check)
+            if city_str in loc_str:
+                score += 100
+            elif city_str[:4] in loc_str: # Partial match for typos like 'Bang' matching 'Bangalore'
+                score += 50
+                
         # Base rating points (e.g. 4.5 gives 45 points)
         if pd.notnull(row.get('rating')):
             score += float(row['rating']) * 10
