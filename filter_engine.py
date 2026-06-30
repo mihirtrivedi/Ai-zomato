@@ -11,7 +11,7 @@ def apply_filters(
     top_n: int = 15
 ) -> List[Dict[str, Any]]:
     """
-    Applies deterministic filters to the dataframe and returns the top N restaurants.
+    Applies a forgiving scoring system to the dataframe and returns the top N restaurants.
     Returns a list of dictionaries to be easily serialized into JSON for the LLM prompt.
     """
     if df.empty:
@@ -19,44 +19,58 @@ def apply_filters(
 
     filtered_df = df.copy()
 
-    # 1. Filter by City (Location)
+    # 1. City is a strict requirement for basic geographic relevance
     if city and 'location' in filtered_df.columns:
-        # Case insensitive partial match
         filtered_df = filtered_df[filtered_df['location'].str.contains(city.lower().strip(), case=False, na=False)]
 
-    # 2. Filter by Cuisine
-    if cuisine and 'cuisine' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['cuisine'].str.contains(cuisine.lower().strip(), case=False, na=False)]
+    if filtered_df.empty:
+        return []
 
-    # 3. Filter by Budget
-    # Assuming Indian Rupees. Low <= 500, Medium 501-1500, High > 1500
-    if budget and 'cost' in filtered_df.columns:
-        budget = budget.lower().strip()
-        if budget == 'low':
-            filtered_df = filtered_df[filtered_df['cost'] <= 500]
-        elif budget == 'medium':
-            filtered_df = filtered_df[(filtered_df['cost'] > 500) & (filtered_df['cost'] <= 1500)]
-        elif budget == 'high':
-            filtered_df = filtered_df[filtered_df['cost'] > 1500]
+    # 2. Forgiving Scoring System
+    def calculate_score(row):
+        score = 0
+        
+        # Base rating points (e.g. 4.5 gives 45 points)
+        if pd.notnull(row.get('rating')):
+            score += float(row['rating']) * 10
+            
+            # Penalty for missing min rating (but doesn't instantly delete them)
+            if min_rating and float(row['rating']) < min_rating:
+                score -= 30
+        
+        # Cuisine points
+        if cuisine and pd.notnull(row.get('cuisine')):
+            if cuisine.lower().strip() in str(row['cuisine']).lower():
+                score += 30
+                
+        # Establishment Type points
+        if rest_type and rest_type.lower() != "any" and pd.notnull(row.get('rest_type')):
+            if rest_type.lower().strip() in str(row['rest_type']).lower():
+                score += 25
+                
+        # Budget points
+        if budget and budget.lower() != "any" and pd.notnull(row.get('cost')):
+            cost = float(row['cost'])
+            b_target = budget.lower().strip()
+            if b_target == 'low' and cost <= 500:
+                score += 20
+            elif b_target == 'medium' and 500 < cost <= 1500:
+                score += 20
+            elif b_target == 'high' and cost > 1500:
+                score += 20
+                
+        return score
 
-    # 4. Filter by Minimum Rating
-    if min_rating is not None and 'rating' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['rating'] >= min_rating]
-
-    # 4.5. Filter by Establishment Type
-    if rest_type and 'rest_type' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['rest_type'].str.contains(rest_type.lower().strip(), case=False, na=False)]
-
-    # 5. Sort by rating (descending) and cost (ascending) to get the best value options
-    if 'rating' in filtered_df.columns and 'cost' in filtered_df.columns:
-        filtered_df = filtered_df.sort_values(by=['rating', 'cost'], ascending=[False, True])
-    elif 'rating' in filtered_df.columns:
-        filtered_df = filtered_df.sort_values(by='rating', ascending=False)
-
-    # 6. Take top N
+    # Calculate match score for all remaining restaurants in the city
+    filtered_df['match_score'] = filtered_df.apply(calculate_score, axis=1)
+    
+    # Sort by the highest score descending
+    filtered_df = filtered_df.sort_values(by='match_score', ascending=False)
+    
+    # Take top N closest matches
     top_restaurants = filtered_df.head(top_n)
     
-    # Replace NaN with None for valid JSON serialization later
+    # Replace NaN with None for valid JSON serialization
     top_restaurants = top_restaurants.where(pd.notnull(top_restaurants), None)
     
     return top_restaurants.to_dict(orient='records')
